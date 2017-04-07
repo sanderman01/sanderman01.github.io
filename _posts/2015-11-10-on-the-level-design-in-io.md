@@ -8,10 +8,9 @@ tags: [emergent gameplay, game design, game development, level design, size matt
 ---
 Just a few weeks ago, a new update to iO was released, which added a whole bunch of new levels! There's also a new trailer:
 
-https://www.youtube.com/watch?v=5bc2q0EAOXA
+<iframe width="455" height="256" src="https://www.youtube.com/embed/5bc2q0EAOXA" frameborder="0" allowfullscreen></iframe>
 
-Available on: <a href="http://store.steampowered.com/app/324070/" target="_blank">Steam</a>, <a href="https://itunes.apple.com/us/app/io-a-physics-platformer/id960831187" target="_blank">Apple Appstore</a> and <a href="https://play.google.com/store/apps/details?id=com.gamious.ioenhanced" target="_blank">Google Play </a>
-(Gotta keep plugging)
+[Get iO!](http://gamious.com/io)
 
 In light of that event, I thought it was time to write another post about the development process of iO. Occasionally I'll get questions from people on the thought process behind these levels. So this time I'll be talking about the subject of level design.
 <h1>Intro</h1>

@@ -8,7 +8,7 @@ tags: [game design, game development, ios, ouya, size matters, steam]
 ---
 Yes. I'm stil alive. I am guilty as charged for not updating this blog since forever.
 
-[youtube https://www.youtube.com/watch?v=Ws_Yncec8Fo]
+<iframe width="455" height="256" src="https://www.youtube.com/embed/Ws_Yncec8Fo" frameborder="0" allowfullscreen></iframe>
 
 With that out of the way, let's focus on some good news! <del>Size Matters</del> <del>Expandaball</del> iO is finally released, after two name changes and way too much time in development! I also wrote a <a title="iO" href="https://sanderman0.wordpress.com/portfolio/io/">page summarizing the whole development process.</a>
 

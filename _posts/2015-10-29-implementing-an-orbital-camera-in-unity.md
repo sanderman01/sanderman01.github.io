@@ -28,13 +28,12 @@ Finally, we multiply our current pitch and yaw rotations together to get our des
 <h1>Example</h1>
 Note that this implementation may not be suitable for everyone, as it largely depends on your use case, but if not then at least it may give you some ideas on how to write your own, suited for your purposes. The example code is also very basic and not optimized so you may want to add a few improvements if you decide to use it.
 
-https://gist.github.com/sanderman01/647f954103c4b3577031
+{% gist 647f954103c4b3577031 %}
 
 There's many ways this example can be improved upon. The following suggestions are left as an exercise for the reader:
 <ul>
 	<li>Zooming. (hint: you'll want to look at logarithmic or exponential functions instead of just linearly increasing/decreasing the distance)</li>
 	<li>A fancy editor that allows you to see the constraint angles in the scene view. (hint: <a href="http://docs.unity3d.com/ScriptReference/Handles.DrawWireArc.html" target="_blank">Handles.DrawWireArc</a>)</li>
-	<li>Can you spot the minor bug? (Well. It may or may not be considered a bug depending on your perspective.)</li>
-	<li>Using local space instead of world space allows different camera angles, but also makes your camera more dependent on the transform hierarchy. Useful e.g. if your target object is a spaceship and you want the camera to keep a certain orientation in relation to the ship instead of the world.</li>
+	<li>Using local space instead of world space allows different camera angles, but also reduces freedom by making your camera more dependent on the transform hierarchy. Useful eg. if your target object is a spaceship and you want the camera to keep a certain orientation in relation to the ship instead of the world.</li>
 	<li>Smooth switching from one target object to another.</li>
 </ul>
