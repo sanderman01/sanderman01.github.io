@@ -1,9 +1,8 @@
 ---
 layout: default
 title: Portfolio
+date: 2017-04-07
 ---
-
-I consider myself a programmer first, and a game designer second. I also do a little pixel art, vertor art or web stuff when the situation requires it. You could call me a Game Developer or Software Engineer or whatever strikes your fancy.
 
 Ever since I started out in this industry I have worked on many projects. Some of those will never see the light of day. Others which I am particularly proud of received a spot on this website. This page lists the impressive or interesting ones among those, and their story.
 
@@ -36,6 +35,8 @@ Personally, I worked on the Fuze and Xbox One ports, adapting existing code or w
 Sometimes this involved writing translation wrappers around platform specific systems, so that the base game could access them in using a platform independent interface. In many other situations, we were not so lucky and invasive changes in the core of the game were required. From new UI screens to large changes of existing systems.
 
 Porting an existing PC game to consoles can be a huge amount of work. Working on this project has definitely give me more perspective on games ported to/from console not only as developer but also as a gamer.
+
+[SpeedRunners is developed by DoubleDutch Games and published by tinyBuild.](http://www.tinybuild.com/speedrunners)
   
 ---
 
@@ -52,7 +53,7 @@ iO is a unique mix between platforming, physics puzzles and racing. The simple c
 
 I am rather proud of the game mechanics, which are very simple, yet allow for a ton of depth in the challenges that can be created, as evidenced by the huge number of levels present in the game. The player can provide torque to roll left or right, and he can grow or shrink. Changing size in this manner also influences properties like mass and friction. This allows for many interesting tricks. [Take a look at how I approached iO level design.]({% post_url 2015-11-10-on-the-level-design-in-io %})
 
-I am also particularly satisfied with the [level editing tools]({% post_url 2013-02-06-creating-a-spline-level-editor-in-unity %}) I created within the Unity3D editor by writing custom editor extensions. This allowed even non-technical members of the team to have a hand in creating levels. These tools made it very easy to create and manipulate level geometry using bezier curves, with appropriate triangle meshes and colliders being generated on-the-fly procedurally. Since all of this happened inside the Unity3D scene editor, testing levels was simply a matter of hitting play mode and allowed fast iteration.
+I am also particularly satisfied with [the level editing tools I created]({% post_url 2013-02-06-creating-a-spline-level-editor-in-unity %}) within the Unity3D editor by writing custom editor extensions. This allowed even non-technical members of the team to have a hand in creating levels. These tools made it very easy to create and manipulate level geometry using bezier curves, with appropriate triangle meshes and colliders being generated on-the-fly procedurally. Since all of this happened inside the Unity3D scene editor, testing levels was simply a matter of hitting play mode and allowed fast iteration.
 
 [iO is published by Gamious and now available on Steam, Windows Store, Xbox One, Playstation 4, Google Play, and App Store.](http://gamious.com/io)
 
@@ -60,9 +61,13 @@ I am also particularly satisfied with the [level editing tools]({% post_url 2013
 ![iO screenshot](assets/images/io/Screenshot iO_0.jpg)
 ![iO screenshot](assets/images/io/Screenshot iO_1.jpg)
 
+---
+
 # Other Projects
 
 These projects tend to be small but interesting in some way. **Source code is available.** If you want, you can clone the repo, open it in Unity, and hit play to see the code in action.
+
+---
 
 ## NBody Simulation on GPU
 
@@ -70,8 +75,41 @@ An n-body system is a system where many bodies interact with each other. Typical
 
 [This project is available on github.](https://github.com/sanderman01/unity-nbody)
 
+---
+
+## Super Wavy Tag Team Crowdsurfing
+
+<iframe width="455" height="256" src="https://www.youtube.com/embed/kdmH_0UMJiM" frameborder="0" allowfullscreen></iframe>
+
+*You finally get to see your favorite band live, you are so close to the stage that you can almost touch them, and then, the singer jumps to surf the waves formed by the hands of his biggest fans, yes that's you! It is your duty... No! it is your DESTINY to carry him as far as possible without dropping him to the ground, for the glory of ROCK!*
+
+A game created recently at the Global Game Jam 2017 in Amsterdam. The theme was Wave, and we settled on the idea of waves in a crowd, such as the crowds at a sports stadium or music concert. In this co-operative 4-player party game you and your friends play the crowd. A rockstar jumps off the stage and it is your job to help him crowdsurf safely and without 'accidents.' It is a very simple game but immensely fun, with lots of potential for hillarity. When playtesters are laughing so hard that it hurts, then you know you've got a fun game.
+
+[Global Game Jam project page](http://globalgamejam.org/2017/games/super-wavy-tag-team-crowd-surfing)  
+[This project is available on github.](https://github.com/sanderman01/ggj2017-crowdsurf)
+
+![GGJ event photo](assets/images/crowdsurf/crowdsurf-jam-award.jpg)
+
+---
+
+## Planet Search
+
+<iframe src="https://player.vimeo.com/video/104621204" width="455" height="256" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
+A game created during the 2014 Pillo Jam. Goal of this game jam was to create game controlled using devices with sensors embedded in real live pillows. This is a 2-player game. Each player controls a single rocket thruster, which will tend to turn the spacecraft to the left or right. Careful coordination is required to fly towards your intended destination. Or you can relax and simply fly around to see where you happen to end up.
+
+[This project is available on Bitbucket](https://bitbucket.org/sanderman/pillojam)
+
+---
+
 ## Pathfinding demo
 
-A basic A* pathfinding demo. This includes a pseudorandomly generated cloud of nodes, representing a galaxy. Nodes are linked by pathways, similar to the hyperlanes in 4x strategy games such as Stellaris. The user can click on two nodes and a path from one to the other will be calculated and highlighted.
+A basic A* pathfinding demonstration. This includes a pseudorandomly generated cloud of nodes, representing a galaxy. Nodes are linked by pathways, similar to the hyperlanes in 4x strategy games such as Stellaris. The user can click on two nodes and a path from one to the other will be calculated and highlighted.
 
 [This project is available on github.](https://github.com/sanderman01/pathfinding-demo)
+
+## Public Space Invaders
+
+<iframe width="455" height="256" src="https://www.youtube.com/embed/XTN57S6kZ7g" frameborder="0" allowfullscreen></iframe>
+
+A game created during the 2012 Games4Health Jam in Eindhoven. Jam goal was to create a game adding extra life to public spaces and to stimulate excercise and movement. We used a top down-camera and computer-vision (OpenCV) to map the locations of players in a large physical area to the locations of player avatars within the game. This allowed for anyone to join in playing the game simply by walking into the play area.

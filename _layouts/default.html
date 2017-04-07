@@ -16,25 +16,29 @@
       <header>
         <h1>{{ site.title | default: site.github.repository_name }}</h1>
         <p>{{ site.description | default: site.github.project_tagline }}</p>
-		<ul>
-			<li><a href="{{ site.baseurl }}{% link index.md %}">Home</a></li>
-			<li><a href="{{ site.baseurl }}{% link portfolio.md %}">Portfolio</a></li>
-		</ul>
-        {% if site.github.is_user_page %}
-          <p class="view"><a href="{{ site.github.owner_url }}">View My GitHub Profile</a></p>
-        {% endif %}
+        <ul>
+          <li><a href="{{ site.baseurl }}{% link index.md %}">Home</a></li>
+          <li><a href="{{ site.baseurl }}{% link portfolio.md %}">Portfolio</a></li>
+          <li><a href="{{ site.baseurl }}{% link resume.md %}">Resume</a></li>
+        </ul>
+        <ul>
+          <li><a href="https://github.com/sanderman01">GitHub</a></li>
+          <li><a href="https://www.linkedin.com/in/averbeek/">Linkedin</a></li>
+          <li><a href="https://www.youtube.com/user/sanderman0">Youtube</a></li>
+        </ul>
       </header>
       <section>
-	  <h1>{{ page.title }}</h1>
-	  <p><small>{{page.date | date: "%B %-d, %Y"}}</small></p>
+      <h1>{{ page.title }}</h1>
+      <p><small>{{page.date | date: "%B %-d, %Y"}}</small></p>
       {{ content }}
       </section>
       <footer>
-        {% if site.github.is_project_page %}
-        <p>This website is maintained by <a href="{{ site.github.owner_url }}">{{ site.github.owner_name }}</a></p>
-        {% endif %}
+        <p><small>
+            Alexander Verbeek<br/>
+            sanderman@gmail.com<br/>
+        </small></p>
         <p><small>Created with <a href="http://jekyllrb.com/">Jekyll</a>. 
-		<br/>Hosted on <a href="https://pages.github.com/">GitHub Pages</a>. </small></p>
+        <br/>Hosted on <a href="https://pages.github.com/">GitHub Pages</a>. </small></p>
       </footer>
     </div>
     <script src="{{ '/assets/js/scale.fix.js' | relative_url }}"></script>
