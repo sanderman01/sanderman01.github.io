@@ -29,7 +29,7 @@ date: 2017-04-07
 
 | Programmer at Righteous Games, Eindhoven | 2015 |
 | --- | --- |
-| Tweaks and optimization work on the Willem II Passage VR simulation on Occulus Rift. |
+| Implementation and optimization of the Willem II Passage Occulus Rift VR sim and attached Arduino bike sensor system. |
 | Designing and implementing gameplay for various logic and spatial awareness puzzles for a puzzle-detective exploration game prototype on tablet. |
 | Implementing game systems like player camera navigation and inventory for this game.
 | Writing technical documentation for use by artists, to improve art pipeline.

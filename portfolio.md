@@ -109,6 +109,8 @@ A basic A* pathfinding demonstration. This includes a pseudorandomly generated c
 
 [This project is available on github.](https://github.com/sanderman01/pathfinding-demo)
 
+---
+
 ## Public Space Invaders
 
 <iframe width="455" height="256" src="https://www.youtube.com/embed/XTN57S6kZ7g" frameborder="0" allowfullscreen></iframe>
