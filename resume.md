@@ -1,25 +1,34 @@
 ---
 title: Resume
 layout: resume
-date: 2017-04-07
+date: 2017-05-05
 ---
 
-# Alexander Verbeek
+# Alexander Verbeek, Game Developer
 
-| Molenheide 26a, 6027PZ | Interest in Fantasy Novels, Sci-fi, Anime,
-| Eindhoven region, The Netherlands | Pen & Paper roleplaying
-| [sanderman@gmail.com](mailto:sanderman@gmail.com) | Favorite games: Dwarf Fortress, 
-| [sanderman01.github.io/portfolio](http://sanderman01.github.io/portfolio) | EU4, Kerbal Space Program, Minecraft, 
-| +31 6 20184971 | Factorio, Dark Souls, Fractured Space
+Programmer with over 5 years experience in the field of video game design and development, as shown in referenced portfolio. Most notably developing and releasing the game iO to Steam from start to finish. Also notable is the porting of the game SpeedRunners to console platforms.
+Focused problem solver with a passion for games and constant desire to pick up and use new languages, environments or other skills.
+Primary hobbies are in fantasy novels, sci-fi, anime and pen & paper roleplaying.
+Favorite video games include Dwarf Fortress, EU4, Kerbal Space Program, Minecraft, Factorio, Dark Souls.
 
-| Tech Skills |
+| Full name: | Alexander (Sander) Verbeek | 
+| Year of Birth: | 1989 |
+| Address: | Molenheide 26a, 6027pz, Eindhoven, The Netherlands |
+| Email: | [sanderman@gmail.com](mailto:sanderman@gmail.com) | 
+| Phone: | +31 6 20184971 |
+| Portfolio: | [sanderman01.github.io/portfolio](http://sanderman01.github.io/portfolio) |
+
+| Core Technical Skills |
 | --- |
-| **Languages** | C#, C++, Java, Haskell, Others. Currently studying Rust. |
-| **Gameplay** | Design + implementation + UX |
-| **Game AI** | eg. flocking, pathfinding and actor behaviours |
-| **Procedural Generation** | eg. generating triangle meshes, landscapes, textures |
+| **Languages** | C#, C++, Java, Haskell, SQL, and many others. |
+| **Game Engines** | Unity3D, Xna/MonoGame, Unreal Engine 4 |
+| **Gameplay** | Rules design, GUI design and implementation |
+| **Game AI** | pathfinding, behaviour trees, flocking, other actor behaviours |
+| **Tools creation and Procedural Content** | generating triangle meshes, landscapes, textures, etc. |
 | **Graphics** | HLSL vertex, geometry, fragment and compute shaders |
-| **Technical Writing** | eg. Guidelines, Documentation |
+| **Technical Writing** | code documentation, asset production guidelines, etc. |
+| **Platforms** | Windows, Linux, Playstation 4, Xbox One, Android, iOS, Arduino |
+| **Version Control Systems** | Git, Mercurial, Subversion |
 
 | Programmer at DoubleDutch Games, Hilversum | 2016 |
 | --- | --- |
@@ -49,4 +58,4 @@ date: 2017-04-07
 
 | Education |
 | --- |
-| Bachelor of Information and Communication Technology (HBO-ICT) + Game Design and Technology at Fontys Eindhoven |
+| HBO-ICT + Game Design and Technology at Fontys Eindhoven (Bachelor of Science) |
