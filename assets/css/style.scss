@@ -10,3 +10,22 @@ body {
 a {
 	color: #2b81ad;
 }
+
+header a {
+	font-size: 11px;
+	display: block
+}
+
+header ul {
+	border: 1px solid #e0e0e0;
+	height: 6em;
+}
+
+header li {
+	border: 0px;
+	height: 2em;
+}
+
+header li a {
+	height: 1em;
+}
