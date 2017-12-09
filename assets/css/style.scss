@@ -3,8 +3,19 @@
 
 @import "{{ site.theme }}";
 
+header {
+	float: none;
+	position: inherit;
+}
+
+footer {
+	float: none;
+	position: inherit;
+}
+
 body {
-  color: #444;
+	color: #333;
+	font-size: 16px;
 }
 
 a {
@@ -28,4 +39,14 @@ header li {
 
 header li a {
 	height: 1em;
+}
+
+p {
+	max-width: 60em;
+	line-height: 1.8em;
+}
+
+section {
+	float: none;
+	width: auto;
 }
