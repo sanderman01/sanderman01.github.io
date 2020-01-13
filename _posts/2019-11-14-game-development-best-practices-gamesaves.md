@@ -6,7 +6,7 @@ author: sanderman0
 comments: true
 tags: [game development]
 ---
-It recently occurred to me that I keep seeing the same kinds of patterns in many of the codebases get to work on, some of which I consider to be flaws, as they take problems that should be relatively simple and make them more difficult than they ought to be. These patterns then influence the code around them, sort like an infection. Once the rest of the codebase relies on flawed assumptions, it often becomes much more difficult and costly to fix the underlying root problem, as doing so may require extensive changes in other locations of the codebase. Though these issues could be prevented in early stages of a project with some thoughtful planning. That's why I decided to start a series on best practices in game development.
+It recently occurred to me that I keep seeing the same kinds of patterns in many of the codebases I get to work on, some of which I consider to be flaws, as they take problems that should be relatively simple and make them more difficult than they ought to be. These patterns then influence the code around them, sort like an infection. Once the rest of the codebase relies on flawed assumptions, it often becomes much more difficult and costly to fix the underlying root problem, as doing so may require extensive changes in other locations of the codebase. Though these issues could be prevented in early stages of a project with some thoughtful planning. That's why I decided to start a series on best practices in game development.
 
 This post's topic is on systems for saving player progression on the local device. E.g. Systems handling save files on PC, or save slots on consoles, and cloud saving/syncing.
 This post will *not* cover the case of online competitive games or MMOs that store all player progression data in a developer hosted database server.
@@ -146,54 +146,69 @@ public class PcStorage {
         string path = GetPath(fileName);
         string tmpPath = GetTempPath(fileName);
         File.WriteAllBytes(tmpPath, buffer);
+        if(File.Exists(path)) { 
+            File.Delete(path); 
+        }
         File.Move(tmpPath, path);
     }
     ...
 }
 ```
-First we write to a temporary path. Once we are completely finished writing to that file, we rename it to what we really want. Renaming a file is a fast operation and extremely unlikely to be interrupted, so for practical purposes we can consider this an atomic operation.
+First we write to a temporary path. Once we have succesfully written the entire file, only then do we move it to its final location. Moving/Renaming a file is a fast operation and unlikely to be interrupted, as long as both paths are in the same filesystem partition. For practical purposes we can consider this an atomic operation.
 If something goes wrong during write, we do not care about what happens to the temporary file. We can throw an exception (or other signal) and let the game and the user know that saving failed for some reason, and the user can try to save the current game state again after resolving whatever issue caused the filesystem error.
 
-## Asynchronicity / Parallel Concurrency
-Up until now, all of the method signatures in our SaveManager or Storage carry the assumption of being synchronous in nature. This API makes it close to impossible for storage implementations to use parallelism under the hood through threading.
+## Asynchronicity / Parallelism
+Up until now, all of the method signatures in our SaveManager or Storage carry the assumption of being synchronous in nature. These API signatures make it close to impossible for storage implementations to apply parallelism under the hood through multi-threading.
 
-The methods `FileExists` and `Load` can never be implemented in a truly asynchronous fashion, because they require a return value immediately. By extension, the caller and other methods higher up in the call stack also assume that these methods return a useful result immediately.
-Best to fix this early before many important game systems are 'infected' with these assumptions and hard to untangle.
+The methods `FileExists` and `Load` can never be implemented in a truly asynchronous fashion, because they require a return value immediately. By extension, the caller and other methods higher up in the call stack also assume that these methods return a useful result immediately. They also make the assumption that the operation (eg. Saving) is finished after returning from the call. Both of these assumptions are problematic.
+We should fix this early before many important game systems become 'infected' with these assumptions and hard to untangle.
 
-*(Technically, you could use a busy-loop/busy-wait to wait on another thread, but you'd still be blocking the main thread until the waiting method can return the result, so you're not gaining much.)*
+*(Technically, to do multi-threading you could use a busy-loop/busy-wait to wait on another thread, but you'd still be blocking the main thread until the worker thread is done and the waiting method can return the result, so you're not gaining much.)*
 
-There's a number of reasons why we want to allow and even encourage asynchronous processing using threading. Most of them boil down to the fact that blocking the Main Thread (or main game loop) is bad so we should try not to block the main thread whenever it can be avoided.
+There's a number of reasons why we want to allow and even encourage asynchronous parallel processing using multi-threading. Most of them boil down to the fact that blocking the Main Thread (or main game loop) is bad so we should try not to block the main thread whenever it can be avoided.
 
 - Stalls and frame drops are generally bad user experience when not inside a loading screen. (eg. checkpoint saving during gameplay)
-- During loading screens it is common to render a spinner or progress indicator, to inform the user we're busy and haven't crashed. This means we cannot block the main thread.
+- During loading screens it is common to render a spinner or progress indicator, to inform the user we are busy and have not crashed. This means we cannot block the main thread. (We need to do things concurrently and in parallel)
 - Some systems require a specific function to be called regularly, to indicate to the system that the application has not frozen. (eg. due to a bug causing an infinite loop)
 
-In addition to these factors, the storage implementation has more freedom in how it implements functionality under the hood if not constrained to a synchronous control flow. For example: It may need to communicate with some other system thread through some platform library. Or it may need to send a request to a remote webserver and wait for a response before it can provide a result. **A synchronous API can easily be wrapped inside an asynchronous API, but the reverse is not the case.**
+In addition to these factors, the storage implementation has more freedom in how it implements functionality under the hood if it is not constrained to a synchronous control flow. For example: It may need to communicate with some other system thread through some platform library. Or it may need to send a request to a remote webserver and wait for a response before it can provide a result. **A synchronous API can easily be wrapped inside an asynchronous API, but the reverse is not the case.**
 
-There's various ways to make your methods asynchronous. Ultimately they all boil down to passing in some input, and then having some kind of way to get the result out later. The implementation can then do whatever it wants, like spawning threads, heavy calculations, waiting for stuff.. All without affecting the main thread.
+There's various ways to make your methods asynchronous. Ultimately they all boil down to passing in some input, and then having some kind of way to get the result out later. The implementation can then do whatever it wants, like spawning threads, heavy calculations, waiting for IO.. All without affecting the main thread.
 
-You can explicitly pass in a response object or struct as parameter. The caller can read the response later to determine if the request was completed and if so access any result or error data. The response could be polled periodically, or some event handler could be called to indicate the response is ready. This sort of approach is quite common in APIs for consoles so it can be good to get familiar with it ahead of time:
+You can explicitly pass in a response object or struct as parameter. The caller can hold on to the reference and poll the response later (eg. in Update) to determine if the operation was completed and if so access any result or error data contained in the response object. The response could be polled periodically, or some event handler could be called to indicate the response is ready. This sort of approach is quite common in APIs for gaming consoles so it can be good to get familiar with it ahead of time.
+
 ```cs
 public class LoadRequest { ... }
 public class LoadResponse { ... }
 
 public interface Storage {
     ...
-    byte[] Load(LoadRequest request, LoadResponse response);
+    void Load(LoadRequest request, LoadResponse response);
     ...
 }
 ```
 
-Another option is to pass in a callback function. Here we use a C# delegate to pass in a callback method to be used to return the result:
+Another option is to pass in a callback function. Here we use a C# delegate to pass in a callback which will be used to return the result:
 ```cs
 public interface Storage {
     ...
-    byte[] Load(LoadRequest request, Action<LoadResponse> onDone);
+    void Load(LoadRequest request, Action<LoadResponse> onDone);
     ...
 }
 ```
-This approach seems very friendly and easy to work with for callers at first glance, as there is supposedly no need to do polling. But there is a catch. That callback could be invoked from another thread which is not the main thread. If this was not expected, then the callback handler method might end up causing a threading warning from Unity if lucky, or end up in a data race with the main thread if unlucky.
+This approach seems very friendly and easy to work with for callers at first glance, as there is supposedly no need to do polling for the result. But there is a catch. That callback could be invoked from another thread which is not the main thread. If is not considered, then the callback handler method might end up manipulating some Unity objects and causing a threading warning if you are lucky, or end up in a data race with the main thread and hard to diagnose bugs if unlucky.
 
-If you're going to use threading, at least one side is going to have to do something to ensure that results are correctly passed back to the main thread. Make this responsibility explicit. For example, you could give each storage implementation an Update method, which the storage implementation can and should use to invoke any pending callbacks from the main thread.
+If you're going to use threading, at least one side is going to have to do something to ensure that results are correctly passed back to the main thread. Make this responsibility explicit. For example, you could give each storage implementation an Update method, which the storage implementation can and should use to invoke any pending callbacks from the main thread. Or you could have the layer higher up do the polling.
 
-Of course high level languages include features like async-await. These can also help to make asynchronous programming easier. Though try to be aware of how they work under the hood before using them. Async-await in C# is built upon the Task model. Within Unity, that means async-await tasks tend to run on the main thread, just like Unity's coroutines, unless you take measures to spawn a new thread.
+Or you could use high-level GC languages features like C#'s async-await. These can also help to make asynchronous programming easier as we can let the runtime take care of mundane stuff like waiting and polling. Though do try to understand how they work under the hood before using them in earnest. Async-await in C# is built upon the Task model. Tasks are not threads. Tasks run on threads. Within Unity, that means async-await tasks tend to run on the main thread, just like Unity's coroutines, unless you take appropriate measures to spawn a task on a new thread.
+```cs
+    public async Task<LoadResponse> Load(LoadRequest request)
+    {
+        return await Task.Run(() =>
+        {
+            byte[] b = File.ReadAllBytes(GetPath(request.fileName));
+            return new LoadResponse() { buffer = b };
+        });
+    }
+```
+In this fragment, the call to `Task.Run` from the System.Threading.Tasks namespace will schedule the work within the lambda to be executed on another thread provided by the threadpool, and as such this operation will not block the main thread that called the Load method. A nice thing about this style is that the asynchronous nature of the method is immediately visible right there in the method signature. An API consumer calling this method will know that the method is asynchronous, realise it may take some time, and will take measures to deal with that appropriately, rather than assumming that every method returns immediately and the concept of time does not exist.
