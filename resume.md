@@ -1,7 +1,7 @@
 ---
 title: Resume
 layout: resume
-date: 2017-05-05
+date: 2020-08-11
 ---
 
 # Alexander Verbeek, Game Developer
