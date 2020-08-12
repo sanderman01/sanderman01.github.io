@@ -4,7 +4,30 @@ title: Portfolio
 date: 2017-04-07
 ---
 
-Ever since I started out in this industry I have worked on many projects. Some of those will never see the light of day. Others which I am particularly proud of received a spot on this website. This page lists the impressive or interesting ones among those, and their story.
+Ever since I started out in this industry I have worked on many projects. Some of which that I am particularly proud of receive a spot on this portfolio.
+
+---
+
+# Escapists 2
+
+<iframe width="455" height="256" src="https://www.youtube.com/embed/oDPtBf6P1wQ" frameborder="0" allowfullscreen></iframe>
+
+I joined Codeglue in September 2017. Over the course of several months, I was assigned to a number of porting projects, such as Castaway Paradise, Corpse Party: Blood Drive, and Descenders.
+My first large project at Codeglue became the task of porting Escapists 2 from PC to iOS and Android for Team17, in a team of several people.
+
+Escapists is a top-down game where the player takes the role of a prison inmate with the goal to break out of prison. Each prison level has a routine with daily activities for prisoners and players have a lot of options to cause chaos in the prison complex and to design and execute elaborate escape plans. The game also includes networked multiplayer, allowing multiple people to play together and co-operate or compete with each other.
+
+This project's story is one of hardships and perseverance.
+
+The Escapists 2 project turned out to be extremely challenging and severely underestimated/overscoped for the time allocated due to a variety of factors, but mainly due to the following constraints:
+* Difficulties communicating with the client. (this meant important issues/decisions requiring client input could not be adequately addressed in a timely manner and would crop up later at inopportune moments)
+* Targeting a specific and very old model of iPhone. (This meant _extremely aggressive_ memory and performance optimizations, many of which required extensive changes to game systems, which would not have been neccesary, if an even slightly more recent device had been targeted)
+* A requirement that the game should work on local wifi hotspots not connected to the internet. Eg. kids playing in a car back-seat on vacation. (The game was built on Photon Pun which is designed to always connect to a Photon Cloud. We had to get _very_ creative with the networking code to hack in offline LAN multiplayer capability)
+* Implementing not just one, but several different control schemes for touch devices. (this added to the already huge workload)
+
+The memory and networking requirements especially meant we were forced to dig deep and make very extensive -and risky!- changes to core systems within the game, and in the Photon Pun networking code. Many of these changes caused bugs, which of course needed to be fixed. The game did not include any test suite. In hindsight, we should have perhaps added regression tests ourselves. Combined with the communication difficulties with the client, these problems turned out to be a recipe for a lengthy development hell.
+
+Nevertheless, we were eventually able to implement all the changes needed, squash most of the bugs caused by the overhaul, and satisfy the client. The game has since been released on iOS and Android as [Escapists 2 Pocket Breakout](https://apps.apple.com/us/app/escapists-2-pocket-breakout/id1356167732).
 
 ---
 
@@ -56,7 +79,7 @@ I am rather proud of the game mechanics, which are very simple, yet allow for a 
 
 I am also particularly satisfied with [the level editing tools I created]({% post_url 2013-02-06-creating-a-spline-level-editor-in-unity %}) within the Unity3D editor by writing custom editor extensions. This allowed even non-technical members of the team to have a hand in creating levels. These tools made it very easy to create and manipulate level geometry using bezier curves, with appropriate triangle meshes and colliders being generated on-the-fly procedurally. Since all of this happened inside the Unity3D scene editor, testing levels was simply a matter of hitting play mode and allowed fast iteration.
 
-[iO is published by Gamious and now available on Steam, Windows Store, Xbox One, Playstation 4, Google Play, and App Store.](http://gamious.com/io)
+[iO is published by Gamious and now available on Steam, Windows Store, Xbox One, Playstation 4, Google Play, and App Store.](https://store.steampowered.com/app/324070/iO/)
 
 ![iO screenshot](assets/images/io/Screenshot iO_4.jpg)
 ![iO screenshot](assets/images/io/Screenshot iO_0.jpg)
