@@ -4,8 +4,10 @@ layout: resume
 date: 2025-02-08
 ---
 
-## Alexander "Sander" Verbeek, Game Developer
+# Alexander "Sander" Verbeek, Game Developer
+
 <img src="{{ site.url }}/assets/images/portrait.jpg" style="float: right"/>
+
 Year of Birth: 1989  
 Citizenship: The Netherlands  
 Address: Fogdevreten 8, LGH 1202, SE-171 65 Solna, Sweden  
