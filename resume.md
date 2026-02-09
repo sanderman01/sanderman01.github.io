@@ -6,7 +6,7 @@ date: 2025-02-08
 
 # Alexander "Sander" Verbeek, Game Developer
 
-<img src="{{ site.url }}/assets/images/portrait.jpg" style="float: right"/>
+<img src="{{ site.url }}/assets/images/portrait.jpg" style="float: right" width=200 height=200 />
 
 Year of Birth: 1989  
 Citizenship: The Netherlands  
