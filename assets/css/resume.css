@@ -12,6 +12,9 @@ small { font-size: 0.6em; }
 
 a { color: rgb(43, 80, 180); }
 
+header { display: none; }
+footer { display: none; }
+
 @media print, screen and (max-width: 960px) { div.wrapper { width: auto; margin: 0; }
   header, section, footer { float: none; position: static; width: auto; }
   header { padding-right: 320px; }

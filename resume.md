@@ -2,7 +2,6 @@
 title: Resume Alexander Verbeek
 layout: resume
 date: 2025-02-08
-<link rel="stylesheet" href="//brick.freetls.fastly.net/Source+Code+Pro:400,900/Source+Sans+Pro:400,900">
 ---
 
 # Alexander "Sander" Verbeek, Game Developer
