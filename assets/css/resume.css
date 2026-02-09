@@ -1,11 +1,31 @@
 body { padding: 2em; font: 1em/1.1 "Source Serif Pro", Georgia, serif; color: #444444; font-weight: 400; max-width: 100em; }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: "Source Sans Pro", Helvetica, sans-serif;
-    text-transform: uppercase;
-    letter-spacing: .02em;
-    font-weight: 900 !important;
-    color: #222;
+  font-family: "Source Sans Pro", Helvetica, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: .02em;
+  font-weight: 900 !important;
+  color: #222;
+  line-height: 1;
+  margin-top: 0;
+  text-rendering: optimizeLegibility;
+  color: #222
+}
+
+h1,
+h2,
+h3 {
+  -webkit-font-feature-settings: "kern" 1, "liga" 1, "calt" 1, "pnum" 1, "tnum" 0, "onum" 1, "lnum" 0, "dlig" 1;
+  -moz-font-feature-settings: "kern" 1, "liga" 1, "calt" 1, "pnum" 1, "tnum" 0, "onum" 1, "lnum" 0, "dlig" 1;
+  font-feature-settings: "kern" 1, "liga" 1, "calt" 1, "pnum" 1, "tnum" 0, "onum" 1, "lnum" 0, "dlig" 1
+}
+
+p {
+    margin: auto auto 1.5em;
+    margin-top: auto;
+    margin-right: auto;
+    margin-bottom: 1.5em;
+    margin-left: auto;
 }
 
 small { font-size: 0.6em; }
