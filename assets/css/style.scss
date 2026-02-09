@@ -6,6 +6,7 @@
 header {
 	float: none;
 	position: inherit;
+	width: unset;
 }
 
 footer {
@@ -16,6 +17,7 @@ footer {
 body {
 	color: #222;
 	font-size: 1em;
+	word-wrap: normal;
 }
 
 a {
@@ -25,6 +27,7 @@ a {
 header ul {
 	display: block;
 	float: none;
+	clear: both;
 	list-style: none;
 	margin: 0 0 0 0;
 	padding: 0 0 0 0;
@@ -57,4 +60,5 @@ p {
 section {
 	float: none;
 	width: auto;
+	clear: both;
 }
