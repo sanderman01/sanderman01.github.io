@@ -14,31 +14,36 @@ footer {
 }
 
 body {
-	color: #333;
-	font-size: 16px;
+	color: #222;
+	font-size: 1em;
 }
 
 a {
 	color: #2b81ad;
 }
 
-header a {
-	font-size: 11px;
-	display: block
-}
-
 header ul {
-	border: 1px solid #e0e0e0;
-	height: 6em;
+	list-style: none;
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
 }
 
-header li {
-	border: 0px;
-	height: 2em;
+header ul li {
+    float: left;
+    list-style: none;
+    text-align: center;
+    background-color: #eef;
+    margin: 0.1em;
+    padding: 0.1em;
+    line-height: 2em;
+    border: 0px;
+	width: 4em;
+    height: 2em;
 }
 
-header li a {
-	height: 1em;
+header ul li a {
+	display: block;
+	font-size: 1em;
 }
 
 p {
