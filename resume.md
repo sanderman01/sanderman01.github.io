@@ -1,12 +1,14 @@
 ---
 title: Resume Alexander Verbeek
 layout: resume
-date: 2025-02-08
+date: 2025-02-09
 ---
 
 # Alexander "Sander" Verbeek, Game Developer
 
 <img src="{{ site.url }}/assets/images/portrait.jpg" style="float: right; width: 200px; height: 200px; margin: 0em 0em 2em 2em;"/>
+
+Coder with a passion for video games. Gamedev since 2012.
 
 Year of Birth: 1989  
 Citizenship: The Netherlands  
@@ -15,38 +17,36 @@ Portfolio: [http://sanderman01.github.io/portfolio](http://sanderman01.github.io
 Email: [sanderman@gmail.com](mailto:sanderman@gmail.com)  
 Phone: +46 76 004 39 54  
 
-Coder with a strong passion for video games. Gamedev since 2012.
+### Notable Projects
+* **[Den of Wolves](https://www.denofwolves.com/en)** Co-Op Heist FPS (10 Chambers)
+* **[GTFO](https://gtfothegame.com/)** Hardcore Co-Op Horror FPS (10 Chambers)
+* **[Escapists 2](https://www.youtube.com/watch?v=qMj-bAyHqq4)** Escape RPG port to iOS, Android (Codeglue, now part of Behaviour Interactive)
+* **[SpeedRunners](https://www.youtube.com/watch?v=BDGzN0fRQI0)** Racing Platformer port to XBoxOne, Fuze (DoubleDutch Games)
+* **[iO](https://store.steampowered.com/app/324070/iO/)** Physics Puzzle Platformer. My very first professionally released game.
 
-## Notable Projects
-* [Den of Wolves](https://www.denofwolves.com/en) Co-Op Heist FPS (10 Chambers)
-* [GTFO](https://gtfothegame.com/) Hardcore Co-Op Horror FPS (10 Chambers)
-* [Escapists 2](https://www.youtube.com/watch?v=qMj-bAyHqq4) Escape RPG port to iOS, Android (Codeglue, now part of Behaviour Interactive)
-* [SpeedRunners](https://www.youtube.com/watch?v=BDGzN0fRQI0) Racing Platformer port to XBoxOne, Fuze (DoubleDutch Games)
-* [iO]((https://store.steampowered.com/app/324070/iO/)) Physics Puzzle Platformer. My very first professionally released game.
-
-## Strengths and Weaknesses
-* Jack-of-many-trades code-wise. Adaptable.
+### Strengths and Weaknesses
+* Jack-of-many-trades code-wise. Adaptable
 * Persistent, focused problem solver
 * Able to perform under pressure
-* My approach is deliberate and thorough
-* My ability to focus and deep dive into investigating an issue or topic helps me solve complex problems, though I need to take care to avoid tunnelvision.
-* I sometimes struggle with ambiguously defined goals, tasks or expectations.
+* Deliberate and thorough
+* Ability to focus and deep dive an issue or topic helps solve complex problems, though I need to avoid tunnelvision.
+* Sometimes struggling with ambiguously defined goals, tasks or expectations.
 
-## Interests
+### Interests
 I like to experiment to learn new techniques, technologies or skills, though finding time to do so can often be difficult when there are so many fun video games to play and books to read. Other hobbies include reading Fantasy and Science-Fiction novels, and pen & paper roleplaying games.
 
-## Skills and Experience 
-**Languages**
+### Skills and Experience 
+#### Languages
 * C# (expert)
 * C++ (proficient)
-* Cg\HLSL shaders (proficient)
-* Rust, Python, Java, Haskell, SQL, etc.  (prior experience)
+* Cg\HLSL shaders, Shader Graph (proficient)
+* Rust, Python, Java, Haskell, SQL, etc. (prior experience)
 
-**Game Engines**
+#### Game Engines
 * Unity3D (expert)
 * Unreal Engine, Godot, Bevy (prior experience)
 
-**Domain Experience**
+#### Domain Experience
 * Gameplay Systems: interactions, stamina, gun behaviours and recoil, networking, etc.
 * Game AI: Pathfinding and object avoidance, (see e.g. Flyers in GTFO) behaviour trees, flocking, etc.
 * Destruction Systems: Applying physics forces on hit or collision, swapping out entities and other effects on trigger.
@@ -59,16 +59,19 @@ I like to experiment to learn new techniques, technologies or skills, though fin
 Steam, Xbox, PSN, PlayFab, Twitch, etc.
 * Tech Writing: Documentation, code guidelines, asset production guidelines, proposals, diagrams.
 
-## Employment History
+### Employment History
 #### Gameplay Programmer at 10 Chambers, 2021 to 2026
 
-Designed and implemented various gameplay and other systems for Co-Op FPS games GTFO and Den of Wolves. I have worked on the teams: Core Tech, Player Journey, and Backend.
-Some notable accomplishments:
+Designed and implemented various game systems for Co-Op FPS games GTFO and Den of Wolves, and other duties like backend, tooling, performance profiling, optimization, diagnosing crashdumps etc. During my time here I worked on the Core Tech, Player Journey, and Backend teams.
+Some notable work:
 
-##### Den of Wolves Destruction System:
+##### Den of Wolves Structure
+Me and Stanislav Eremeev set up the Den of Wolves project during early pre-production, using Unity's Data Oriented Tech stack. (DOTS) Gameplay sim ran in ECS worlds, with client world handling local sim and presentation, and authoritative server world handling important stuff. Using ECS worlds allowed us to easily run both server and client worlds within the same Unity Editor process to test client-server networking. ECS paradigm allowed us to enforce very strict isolation between client and server worlds state, which would otherwise be difficult to achieve in a traditional Object Oriented Unity GameObject paradigm, and also allowed us to take advantage of Unity's Jobs system and Burst compiler in many game systems.
+Unfortunately Unity's DOTS stack also created new difficulties. A lot of Unity systems and APIs were still traditional GameObject style and hard/expensive to access from within ECS or vice versa. Baking assets into Entity Scene format also introduced extra complexity.
+
+##### Den of Wolves Destruction System
 Goal was to give tech artists tools to create destructible objects, and to allow various effects on trigger, such as object replacement with more detailed destroyed objects, and cheap primitive network syncing. To avoid load on dedicated servers, Destruction was to use custom sync rather than our standard NetEntity sync.
-Achieved with a client-only destruction approach. Client sim sends messages to server and other clients indicating destroyed objects. Server acts as message broker and bookkeeper for an array where each bit represents one destructible object.
-When state changes, or a new client joins, this array is sent and clients locally trigger each destructible object and its effects. Only trigger state bit is synced.
+Achieved with a client-only destruction sim approach. Client sim sends messages to server and other clients indicating destroyed objects. Server acts as message broker and bookkeeper. This partial syncing was fine as long as destruction did not significantly affect bullet hits, player collisions or health. Ironically it was later decided to pivot to Peer-to-Peer networking.
 
 ##### GTFO Flyer pathfinding:
 Goal was to enable free movement throughout the entire volume of the rooms of the complex.
@@ -89,7 +92,11 @@ Implementation and optimization of the Willem II Passage Occulus Rift VR sim and
 Designing and implementing gameplay for various logic and spatial awareness puzzles for an in-house ip puzzle-detective exploration game prototype targeted to tablets.
 
 #### Indie. iO, 2012-2014
- Collaboration with Gamious, Amsterdam. Developing level editing tools, UI, and other game systems. Drafting and implementing levels. Conceptualizing novel ways to combine existing game mechanics. Developing control schemes for gamepad and touchscreen. For PC, Mobile and Ouya.
+Collaboration with Gamious, Amsterdam. Developing level editing tools, UI, and other game systems. Drafting and implementing levels. Conceptualizing novel ways to combine existing game mechanics. Developing control schemes for gamepad and touchscreen. For PC, Mobile and Ouya.
 
-#### Internships: Little Chicken, Amsterdam 2012, Blewscreen, Tilburg 2010  
-#### Education: HBO-ICT + Game Design and Technology at Fontys Eindhoven (Bachelor of Science) 
+#### Internships
+Little Chicken, Amsterdam 2012  
+Blewscreen, Tilburg 2010
+
+#### Education
+HBO-ICT + Game Design and Technology at Fontys Eindhoven (Bachelor of Science) 
