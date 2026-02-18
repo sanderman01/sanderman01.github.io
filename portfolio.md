@@ -1,12 +1,94 @@
 ---
 layout: default
 title: Portfolio
-date: 2017-04-07
+date: 2026-02-18
 ---
 
 Ever since I started out in this industry I have worked on many projects. Some of which that I am particularly proud of receive a spot on this portfolio.
 
 ---
+
+# Den of Wolves
+
+<iframe width="455" height="256" src="https://www.youtube.com/embed/CCUnDA8BpIU" frameborder="0" allowfullscreen></iframe>
+
+Den of Wolves is a co-op heist FPS. In this techno-thriller you and your friends operate as criminals for hire in the conflicts between rival corporations in Midway City. Gather your crew, design the plan, gear up and execute the heist.
+
+This project is meant to be a spiritual successor to Ulf's previous projects, and is also inspired by movies such as Heist and Inception.
+
+We started on pre-production for Den of Wolves in 2022.
+
+##### Structure
+Me and Stanislav Eremeev set up the Den of Wolves project during early pre-production. The two of us together with Ulf Andersson, decided to build on Unity's Data Oriented Tech stack. (DOTS) We knew this was a bit of a gamble, as these Unity packages were still experimental at the time.
+
+Gameplay simulation ran on systems inside ECS worlds, with client world handling local gameplay simulation and presentation, and authoritative server world handling authoritative networking stuff. Using ECS worlds allowed us to easily run both server and client worlds within the same Unity Editor process to test client-server networking. This helped speed up testing during development as there was no need to spin up another Unity Editor process or create a build to test multiplayer functionality in a networking context.
+
+The ECS paradigm allowed us to enforce very strict isolation between client and server worlds state within the same process, which would otherwise be difficult to achieve in a traditional Object Oriented Unity GameObject paradigm.
+
+ECS also allowed us to take advantage of Unity's Jobs system and Burst compiler for performance in many game systems. 
+A side benefit: Quick level load in release builds. Loading entities from flat tabular data (a few memcpy ops) is much faster than deserialising GameObjects and their component objects.
+
+Unity's DOTS stack also created new difficulties. A lot of Unity systems and APIs were still traditional GameObject style and cumbersome/expensive to access from within ECS systems or jobs and vice versa from the main-thread. Baking assets into Entity Scene format also introduced extra complexity and during development we incurred a lot of time for scene baking before play mode. 
+
+Overall I am of the opinion that DOTS ECS is good for the future of game development in Unity, but current transition era is problematic. Also this paradigm is better suited for some types of games than for others. It could be argued that the general gameplay logic of an FPS is not the best use-case for ECS.
+
+Besides ECS, I proposed using the following solutions in the project:
+* VContainer for dependency injection.  
+(this paradigm was quite succesfull at making dependencies between systems more clearly declared and keeping code spaghetti to a minimum)
+* ReWired for input mapping and controller support  
+(I had prior experience with this product and had more faith in it than the new Unity input package at that time)
+* UniTask for lightweight async tasks, for communication to our backend and other remote services.  (Helped writing async code and avoid/reduce callback hell in code handling remote requests and responses)
+
+##### Destruction System
+I designed and implemented a destruction system with the goal to give tech artists flexible tools to create destructible objects prefabs, and to allow various effects on trigger, such as object replacement with more detailed destroyed object models, and cheap primitive network syncing. To avoid load on dedicated servers, Destruction was to use custom sync rather than our standard NetEntity sync.  (diffing that many entities would have been too expensive, at least early in development of our networking system)
+
+Achieved with a client-only destruction sim approach. Client sim sends messages to server and other clients indicating destroyed objects. Server acts as message broker and bookkeeper. When a new client joins, the data keeping track of which objects are destroyed is small enough be easily sent to other clients. (basically a bitarray)
+
+This partial syncing was fine as long as destruction did not significantly affect bullet hits, player collisions or health. Ironically it was later decided to pivot to Peer-to-Peer networking. In hindsight, I could have done a destruction system with higher fidelity network syncing and greater flexibility.
+
+##### Misc
+Besides the above, I also worked on many other areas such as:
+* Gameplay Interactions. (e.g. doors)
+* Weapon Recoil. (a deceptively complex problem)
+* Volume Pathfinding. (based on the flyer pathfinding I had created for GTFO previously)
+* Gameplay Graph. (in-house visual logic tool with ECS support, similar to Unreal's Blueprint)
+* Backend communication. Initially to our own backend using GRPC and later PlayFab.
+* In-game Profiler Recording tools, and out-of-game tools for visualizing profiling data.
+* Data Visualization. (e.g. In which level areas do player get downed often)
+* Logging from dedicated servers running in Kubernetes in Google Cloud Platform.
+* Testing Framework
+* Debugging crashdumps
+
+# GTFO
+
+<iframe width="455" height="256" src="https://www.youtube.com/embed/dhMw5Zb6hZs" frameborder="0" allowfullscreen></iframe>
+
+GTFO is a hardcore cooperative horror shooter that throws you from gripping suspense to explosive action in a heartbeat. Stealth, strategy, and teamwork are necessary to survive in your deadly, underground prison. Work together or die together.
+
+I was recruited to 10 Chambers in April 2021 to help develop GTFO to its 1.0 release in December that year, and beyond. I worked on the following areas:
+* Various gameplay bugfixes and diagnosing crash dumps
+* Improvements and fixes for the Glue Gun
+* Designed and implementated a player stamina system  (Goal was to disincentivise kiting enemies during combat, but also not to hinder non-combat exploration of the complex outside of combat)
+* Collaboration with Gameplay Designers to implement functionality for the abilities of the end boss of Rundown 6.0, an enemy commonly known as the Kraken or Nemesis.
+* Designed and implementated a pathfinding system through 3D volumes to be used by flying enemies of varying sizes.  
+I started out using a oct-tree approach, but then replaced that with a simpler system where each room has its own corresponding regular grid and each cell has a distance value to the nearest wall or other solid obstacle.  Using multiple regular grids covering rooms rather than one big grid covering the entire level resulted in something resembling a sparse data structure, while retaining simplicity, performance, and limiting memory usage. For pathfinding I used a hierarchical approach, calculating high-level paths from room to room, and lower level paths only within the room and to the players or to the door/passage into the next room, both using a variant of A-Star.
+
+We released GTFO 1.0 on Steam in December 2021.
+
+# Shadowrun Trilogy
+
+<iframe width="455" height="256" src="https://www.youtube.com/embed/IinkPsj5taA" frameborder="0" allowfullscreen></iframe>
+
+Shadowrun is a tactical role-playing game which takes place in the science fantasy setting of the Shadowrun tabletop role-playing game.
+
+The Shadowrun Trilogy project was to port the three Shadowrun games to the consoles XboxOne and Series X, PS4 and PS5, and Nintendo Switch, as a compilation game. This involved:
+
+* Upgrading the project to the latest version of the Unity game engine and getting it to run on console systems.
+* Replacing the old UI based on the deprecated and no longer maintained EGUI system with the newer uGUI.
+* Overhauling the design and functionality of all UI screens making them suitable for control using gamepads or other controllers.
+* Integration with console functionality and systems such as user profiles, cloud saves, IME, suspend/resume, etc.
+* Various optimizations to improve game performance on systems with limited memory and gpu performance.
+* Technical requirements work (eg. XRs) for compatibility and title certification on consoles.
 
 # Escapists 2
 
