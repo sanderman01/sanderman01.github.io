@@ -14,6 +14,7 @@ Year of Birth: 1989
 Citizenship: The Netherlands  
 Address: Fogdevreten 8, LGH 1202, SE-171 65 Solna, Sweden  
 Portfolio: [http://sanderman01.github.io/portfolio](http://sanderman01.github.io/portfolio)  
+Linkedin: [https://www.linkedin.com/in/averbeek/](https://www.linkedin.com/in/averbeek/)  
 Email: [sanderman@gmail.com](mailto:sanderman@gmail.com)  
 Phone: +46 76 004 39 54  
 
@@ -61,14 +62,20 @@ Steam, Xbox, PSN, PlayFab, Twitch, etc.
 * Tech Writing: Documentation, code guidelines, asset production guidelines, proposals, diagrams.
 
 ### Employment History
-#### Gameplay Programmer at 10 Chambers, 2021 - 2026
+#### Senior Gameplay Programmer at 10 Chambers, 2021 - 2026
 
 Designed and implemented various game systems for Co-Op FPS games GTFO and Den of Wolves, and other duties like backend, tooling, performance profiling, optimization, diagnosing crashdumps etc. During my time here I also worked on the Core Tech, Player Journey, and Backend teams.
 Notable work:
 
 ##### Den of Wolves Structure
-Me and Stanislav Eremeev set up the Den of Wolves project during early pre-production, using Unity's Data Oriented Tech stack. (DOTS) Gameplay sim ran in ECS worlds, with client world handling local sim and presentation, and authoritative server world handling important stuff. Using ECS worlds allowed us to easily run both server and client worlds within the same Unity Editor process to test client-server networking. ECS paradigm allowed us to enforce very strict isolation between client and server worlds state, which would otherwise be difficult to achieve in a traditional Object Oriented Unity GameObject paradigm, and also allowed us to take advantage of Unity's Jobs system and Burst compiler in many game systems.
-Unfortunately Unity's DOTS stack also created new difficulties. A lot of Unity systems and APIs were still traditional GameObject style and hard/expensive to access from within ECS or vice versa. Baking assets into Entity Scene format also introduced extra complexity.
+Me and Stanislav Eremeev set up the Den of Wolves project during early pre-production, using Unity's Data Oriented Tech stack. (DOTS) 
+Gameplay sim ran in ECS worlds, with client world handling local sim and presentation, and authoritative server world handling important stuff. Using ECS worlds allowed us to easily run both server and client worlds within the same Unity Editor process to test client-server networking. 
+ECS paradigm allowed us to enforce very strict isolation between client and server worlds state, which would otherwise be difficult to achieve in a traditional Object Oriented Unity GameObject paradigm. 
+This also allowed us to take advantage of Unity's Jobs system and Burst compiler in many game systems. 
+A side benefit: Quick level load in release builds. Loading entities from flat tabular data (a few memcpy ops) is much faster than deserialising GameObjects and their component objects.
+Unity's DOTS stack also created new difficulties.
+A lot of Unity systems and APIs were still traditional GameObject style and hard/expensive to access from within ECS or vice versa. Baking assets into Entity Scene format introduced extra complexity. 
+I am of the opinion that DOTS ECS is good for the future of game development in Unity, but current transition era is problematic.
 
 ##### Den of Wolves Destruction System
 Goal was to give tech artists tools to create destructible objects, and to allow various effects on trigger, such as object replacement with more detailed destroyed objects, and cheap primitive network syncing. To avoid load on dedicated servers, Destruction was to use custom sync rather than our standard NetEntity sync.
